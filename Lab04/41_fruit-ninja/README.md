@@ -3,7 +3,7 @@
 ## Fruit Ninja – Python/Pygame
 
 **Student:** ABHISHEK
-**USN:** PES1UG24CS650 
+**SRN:** PES1UG24CS650
 **Lab:** Software Engineering Lab – 4  
 **Project:** Fruit Ninja  
 **Technology:** Python, Pygame  
