@@ -2,45 +2,40 @@
 
 ## Fruit Ninja – Python/Pygame
 
-**Student:** ABHISHEK
-**SRN:** PES1UG24CS650
-**Lab:** Software Engineering Lab – 4  
+**Student:** Abhishek  
+**SRN:** PES1UG24CS650  
+**Course:** Software Engineering Lab 4  
 **Project:** Fruit Ninja  
-**Technology:** Python, Pygame  
-**Project Directory:** `SE_Lab4/41_fruit-ninja`  
-**Personal Repository:** `SE_PES1UG24CS650`
+**Technologies:** Python, Pygame, Git, GitHub
 
 ---
 
 ## 1. Project Overview
 
-This project is a Python/Pygame-based Fruit Ninja game enhanced as part of Software Engineering Lab 4 using the Vibe Coding approach.
+This project is a Fruit Ninja–style game developed using Python and Pygame as part of Software Engineering Lab 4 – Vibe Coding.
 
-The starter project was extended through four independent tasks:
+The original starter project was enhanced through four tasks to improve gameplay, user experience, and functionality.
 
-1. Refine Collision Detection
-2. Implement Game Over Screen
-3. Add Replay and Difficulty Selection
-4. Add Sound Effects
+### Tasks Implemented
 
-Each task was implemented, tested, committed separately using Git, and pushed to the personal GitHub repository.
+1. Improve fast-swipe collision detection.
+2. Implement a Game Over screen.
+3. Add replay functionality and difficulty levels.
+4. Add sound effects for gameplay events.
+
+Each task was developed and tested as part of the project workflow.
 
 ---
 
 ## 2. Objectives
 
-The objectives of this lab were:
-
-- Improve the existing Fruit Ninja gameplay.
-- Make fruit slicing more reliable.
-- Add a proper Game Over state.
-- Provide replay functionality.
-- Add multiple difficulty levels.
-- Improve the game experience using sound effects.
-- Practice iterative development and debugging.
-- Use Git for version control.
-- Maintain separate commits for individual tasks.
-- Test each feature after implementation.
+- Improve fruit slicing during fast mouse movements.
+- Display a Game Over screen when the round ends.
+- Show the final score and replay instructions.
+- Provide Easy, Medium, and Hard difficulty levels.
+- Allow players to start a new round without restarting the application.
+- Add sound effects for fruit slicing and bomb collisions.
+- Practise debugging, iterative development, and version control using Git and GitHub.
 
 ---
 
@@ -50,402 +45,236 @@ The objectives of this lab were:
 - **Game Framework:** Pygame
 - **Version Control:** Git
 - **Repository Hosting:** GitHub
-- **Development Environment:** Visual Studio Code
+- **Code Editor:** Visual Studio Code
 
 ---
 
-# 4. Tasks Implemented
+## 4. Tasks Implemented
 
-## Task 1 – Refine Collision Detection
+### Task 1 – Fast-Swipe Collision Detection
 
-### Prompt
+**Objective:** Improve collision detection so that fruit is less likely to be missed during fast mouse swipes.
 
-> Improve the collision detection in the Fruit Ninja game so that fruit slicing works reliably, especially when the player performs fast mouse swipes. Use the line segment between the previous mouse position and the current mouse position for collision detection instead of checking only the current mouse position. Also add a small collision margin around the fruit so that fast swipes are detected reliably. Do not change unrelated gameplay features.
+**Implementation:**
 
-### Implementation
+- Checks the line segment between the previous and current mouse positions.
+- Samples intermediate points along the swipe.
+- Checks the sampled points against fruit hitboxes.
+- Uses the existing fruit-slicing logic when a collision is detected.
 
-The collision detection was improved so that the game checks the line segment between the previous mouse position and the current mouse position.
+**Result:** Fast mouse movements can detect fruit collisions more reliably.
 
-An additional collision margin was introduced around the fruit to improve detection reliability during fast swipes.
+**Git commit message:** `Fix fast-swipe collision detection`
 
-### Result
+### Task 2 – Game Over Screen
 
-Fast mouse swipes can reliably detect fruit slicing even when the mouse moves quickly between frames.
+**Objective:** Display a clear Game Over screen when the player loses.
 
-### Commit
+**Implementation:**
 
-```text
-Task 1: Refine collision detection
-```
+- Displays a Game Over title.
+- Adds a translucent overlay over the game screen.
+- Displays the final score.
+- Shows instructions for selecting a difficulty and replaying.
 
----
+**Result:** Players receive clear feedback when a round ends and can see how to start another round.
 
-## Task 2 – Implement Game Over Screen
+**Git commit message:** `Add Game Over screen`
 
-### Prompt
+### Task 3 – Replay and Difficulty Levels
 
-> Implement a proper Game Over screen for the Fruit Ninja game. When the player loses, stop the normal gameplay and display a clear Game Over message/state to the player. The Game Over state should integrate cleanly with the existing game flow and should not affect unrelated functionality.
+**Objective:** Allow players to replay the game and choose different difficulty levels.
 
-### Implementation
+**Implementation:**
 
-A proper Game Over state was added.
+Three difficulty levels are available:
 
-When the player reaches the Game Over condition:
+| Difficulty | Spawn Interval | Speed Scale | Bomb Probability |
+|---|---:|---:|---:|
+| Easy | 70 | 0.8 | 8% |
+| Medium | 55 | 1.0 | 15% |
+| Hard | 40 | 1.2 | 25% |
 
-- Normal gameplay stops.
-- A clear Game Over state is displayed.
-- The player can proceed to the replay/difficulty selection flow.
+The Game Over screen supports the following keyboard controls:
 
-### Result
+- **E** – Start a new Easy round.
+- **M** – Start a new Medium round.
+- **H** – Start a new Hard round.
 
-The game now provides clear feedback when the player loses instead of simply stopping gameplay.
+The reset functionality clears the previous round's fruits and swipe trail, resets the score and lives, and applies the selected difficulty.
 
-### Commit
+**Result:** Players can replay the game with different difficulty settings without restarting the application.
 
-```text
-Task 2: Implement game over screen
-```
+**Git commit message:** `Add replay and difficulty levels`
 
----
+### Task 4 – Sound Effects
 
-## Task 3 – Add Replay and Difficulty Selection
+**Objective:** Add audio feedback for important gameplay events without requiring separate external sound files.
 
-### Prompt
+**Implementation:**
 
-> Add replay functionality and difficulty selection to the Fruit Ninja game. After Game Over, provide options for Easy, Medium, Hard, and Exit. Make the difficulty levels meaningfully different by changing gameplay parameters such as fruit spawn interval, bomb probability, and object speed. Allow the player to start a new game without restarting the application. Keep the existing gameplay and collision improvements working correctly.
+- Generates sound effects in memory using Python and Pygame.
+- Plays a higher-pitched sound when fruit is sliced.
+- Plays a lower-pitched sound when a bomb is hit.
+- Reuses the bomb sound when the player loses all lives.
+- Handles sound initialization errors so that unavailable audio does not unnecessarily stop the game.
 
-### Implementation
+The sound setup and playback logic are implemented in `game/game_engine.py`.
 
-Replay functionality and multiple difficulty levels were added.
+**Result:** The game provides audio feedback for fruit slicing, bomb collisions, and losing all lives.
 
-Available options:
-
-- Easy
-- Medium
-- Hard
-- Exit
-
-The difficulty level changes gameplay parameters such as:
-
-- Fruit spawning interval
-- Bomb probability
-- Object speed
-
-Replay allows the player to start a new game without restarting the application.
-
-During development, gameplay, rendering, movement, and collision-related issues were debugged and corrected.
-
-### Result
-
-The game now provides multiple difficulty levels and allows the player to replay after Game Over.
-
-### Commit
-
-```text
-Task 3: Add replay and difficulty selection
-```
+**Git commit message:** `Add sound effects`
 
 ---
 
-## Task 4 – Add Sound Effects
+## 5. Final Features
 
-### Prompt
+The completed project includes:
 
-> Add sound effects to the Fruit Ninja game for the major gameplay events. Implement a sound management module and add separate audio feedback for fruit slicing, bomb explosion, and Game Over. Ensure the sounds are triggered at the correct events and do not break the existing gameplay, replay, difficulty selection, or collision detection features.
-
-### Implementation
-
-A dedicated sound management module was added:
-
-```text
-game/sound_manager.py
-```
-
-The following sound effects were implemented:
-
-- Fruit slicing sound
-- Bomb explosion sound
-- Game Over sound
-
-The sounds are triggered according to the corresponding gameplay events.
-
-### Result
-
-The game now provides audio feedback for important gameplay events.
-
-### Commit
-
-```text
-Task 4: Add sound effects
-```
+- Improved fast-swipe collision detection.
+- Fruit slicing and bomb collision handling.
+- Game Over screen with final score.
+- Replay functionality.
+- Easy, Medium, and Hard difficulty levels.
+- Difficulty-dependent spawning, speed, and bomb probability.
+- Generated sound effects for gameplay events.
+- Git version control for tracking development changes.
 
 ---
 
-# 5. Final Features
+## 6. Project Structure
 
-The completed Fruit Ninja game contains:
+```text
+41_fruit-ninja/
+├── game/
+│   ├── game_engine.py
+│   └── fruit.py
+├── .gitignore
+├── main.py
+├── requirements.txt
+├── README.md
+├── before.mp4
+├── After.mp4
+└── Fruit_Ninja_Code_Change_Chat_History.pdf
+```
 
-- Improved fruit collision detection
-- Reliable fast-swipe slicing
-- Game Over screen
-- Replay functionality
-- Easy difficulty
-- Medium difficulty
-- Hard difficulty
-- Difficulty-based gameplay changes
-- Fruit slicing sound
-- Bomb explosion sound
-- Game Over sound
+The `game` directory contains the game engine and fruit-related logic. The `main.py` file launches the game, while `requirements.txt` lists the required Python dependencies.
+
+The repository may contain additional files as part of the starter project.
 
 ---
 
-# 6. Project Structure
+## 7. How to Run the Project
 
-The main project is located inside:
-
-```text
-SE_Lab4/
-└── 41_fruit-ninja/
-```
-
-The sound functionality includes:
-
-```text
-game/
-└── sound_manager.py
-```
-
-The remaining project files are part of the Fruit Ninja starter project and its updated implementation.
-
----
-
-# 7. How to Run the Project
-
-## Step 1 – Navigate to the Project
+### Step 1 – Clone the Repository
 
 ```bash
-cd SE_Lab4/41_fruit-ninja
+git clone https://github.com/SETAPESU26/41_fruit-ninja.git
 ```
 
-## Step 2 – Install Pygame
+Alternatively, download the repository and open the project folder in Visual Studio Code.
+
+### Step 2 – Open the Project Directory
+
+```bash
+cd 41_fruit-ninja
+```
+
+### Step 3 – Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+If Pygame is not included in the installed dependencies, install it using:
 
 ```bash
 pip install pygame
 ```
 
-## Step 3 – Run the Game
-
-Run the main Python entry-point file of the project:
+### Step 4 – Run the Game
 
 ```bash
 python main.py
 ```
 
-> If the starter project uses a different entry-point filename, run that existing main Python file instead.
+---
+
+## 8. Testing
+
+The following features should be verified during testing:
+
+- **Collision detection:** Test slow and fast mouse swipes across fruit.
+- **Game Over screen:** Verify that the screen appears after a bomb collision or when all lives are lost.
+- **Final score:** Confirm that the final score is displayed.
+- **Replay:** Test starting a new round using E, M, and H.
+- **Difficulty levels:** Verify that Easy, Medium, and Hard use their respective settings.
+- **Sound effects:** Test the sounds for fruit slicing, bomb collisions, and losing all lives.
+- **Integration:** Verify that the features work together.
 
 ---
 
-# 8. Testing
+## 9. Before and After Demonstration
 
-The complete game was tested after implementing all four tasks.
+### Before Implementation
 
-## 8.1 Collision Detection Testing
+The original project is demonstrated in `before.mp4`.
 
-Fast mouse swipes were tested to verify that fruits could be sliced correctly.
+### After Implementation
 
-**Status:** Passed
+The updated project is demonstrated in `After.mp4`.
 
-## 8.2 Game Over Testing
-
-The game was played until the Game Over condition was reached.
-
-**Status:** Passed
-
-## 8.3 Replay Testing
-
-Replay functionality was tested after Game Over.
-
-**Status:** Passed
-
-## 8.4 Difficulty Testing
-
-The following difficulty levels were tested:
-
-- Easy
-- Medium
-- Hard
-
-**Status:** Passed
-
-## 8.5 Sound Testing
-
-The following sound effects were tested:
-
-- Fruit slicing
-- Bomb explosion
-- Game Over
-
-**Status:** Passed
-
-## 8.6 Final Integration Testing
-
-All implemented features were tested together after completing Task 4.
-
-**Status:** Passed
+These videos are included in the repository for comparison between the starter version and the enhanced game.
 
 ---
 
-# 9. Before Implementation Video
+## 10. Git Version Control
 
-The following video shows the original/starter version of the Fruit Ninja project before implementing the Lab 4 tasks.
+Git was used to track the implementation of the four tasks. The changes were organised into separate commits.
 
-## Before Video
+| Task | Commit Message |
+|---|---|
+| Task 1 | `Fix fast-swipe collision detection` |
+| Task 2 | `Add Game Over screen` |
+| Task 3 | `Add replay and difficulty levels` |
+| Task 4 | `Add sound effects` |
 
-**Insert / Embed Before Video Here**
-
-<br><br><br><br>
-
-**Before Video Link:**  
-`PASTE BEFORE VIDEO LINK HERE`
-
----
-
-# 10. After Implementation Video
-
-The following video shows the final Fruit Ninja project after completing all four Lab 4 tasks.
-
-## After Video
-
-**Insert / Embed After Video Here**
-
-<br><br><br><br>
-
-**After Video Link:**  
-`PASTE AFTER VIDEO LINK HERE`
+The project and its submission files are maintained in the personal GitHub repository.
 
 ---
 
-# 11. Git Version Control
+## 11. Development Workflow
 
-Git was used to maintain the project and track the implementation of each task.
-
-Each task was committed separately.
-
-### Task 1
-
-```text
-Task 1: Refine collision detection
-```
-
-### Task 2
-
-```text
-Task 2: Implement game over screen
-```
-
-### Task 3
-
-```text
-Task 3: Add replay and difficulty selection
-```
-
-### Task 4
-
-```text
-Task 4: Add sound effects
-```
-
-All task changes were pushed to the personal GitHub repository.
+1. Start with the provided Fruit Ninja project.
+2. Improve fast-swipe collision detection.
+3. Test the collision changes and commit them.
+4. Implement the Game Over screen.
+5. Test the end-of-round behaviour and commit the changes.
+6. Add replay and difficulty selection.
+7. Test the difficulty settings and reset behaviour.
+8. Add sound effects and test audio playback.
+9. Perform final integration testing.
+10. Maintain the project files and documentation in GitHub.
 
 ---
 
-# 12. Development Workflow
+## 12. Lab 4 Deliverables
 
-The following workflow was followed:
+The repository contains the project files and supporting submission materials:
 
-```text
-Starter Project
-      |
-      v
-Task 1 – Collision Detection
-      |
-      v
-Testing
-      |
-      v
-Git Commit & Push
-      |
-      v
-Task 2 – Game Over Screen
-      |
-      v
-Testing
-      |
-      v
-Git Commit & Push
-      |
-      v
-Task 3 – Replay & Difficulty
-      |
-      v
-Debugging & Testing
-      |
-      v
-Git Commit & Push
-      |
-      v
-Task 4 – Sound Effects
-      |
-      v
-Testing
-      |
-      v
-Git Commit & Push
-      |
-      v
-Final Integration Testing
-      |
-      v
-Before / After Videos
-```
+1. Updated Fruit Ninja source code.
+2. Before implementation video.
+3. After implementation video.
+4. Vibe Coding prompt documentation.
+5. Code-change chat history PDF.
+6. Git commits for the implemented tasks.
 
 ---
 
-# 13. Final Task Status
+## 13. Conclusion
 
-| Task | Feature | Status |
-|------|---------|--------|
-| Task 1 | Refine Collision Detection | Completed |
-| Task 2 | Game Over Screen | Completed |
-| Task 3 | Replay Functionality | Completed |
-| Task 3 | Difficulty Selection | Completed |
-| Task 4 | Sound Effects | Completed |
-| Final | Integration Testing | Completed |
+The Fruit Ninja project was enhanced through four Vibe Coding tasks: improving fast-swipe collision detection, implementing a Game Over screen, adding replay and difficulty selection, and introducing sound effects.
 
----
+These improvements make the game more responsive and engaging while providing an opportunity to practise Python programming, debugging, testing, and Git-based version control.
 
-# 14. Lab 4 Deliverables
-
-The completed Lab 4 work consists of:
-
-1. **Before Video** – Original/starter project demonstration.
-2. **After Video** – Final project demonstration after implementing all tasks.
-3. **Updated Source Code** – Fruit Ninja project containing all four implemented tasks.
-4. **Separate Git Commits** – Individual commits for each task.
-5. **Vibe Coding Chat History** – The four prompts used to implement the four tasks.
-
----
-
-# 15. Conclusion
-
-The Fruit Ninja project was successfully enhanced through four independent Vibe Coding tasks.
-
-The final application includes improved collision detection, a proper Game Over screen, replay functionality, multiple difficulty levels, and sound effects.
-
-Each task was implemented and tested independently, committed separately using Git, and pushed to the personal repository.
-
-The complete project was finally integration-tested and all implemented features were verified successfully.
-
-## Final Status
-
-**LAB 4 – VIBE CODING: COMPLETED SUCCESSFULLY**
+**Software Engineering Lab 4 – Vibe Coding: Fruit Ninja**
