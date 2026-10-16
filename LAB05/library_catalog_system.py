@@ -1,3 +1,4 @@
+
 """Library catalog management module."""
 
 import hashlib
